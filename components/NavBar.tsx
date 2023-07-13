@@ -10,7 +10,7 @@ import DesktopNav from './DesktopNavigation'
 import MobileNavigation from './MobileNavigation'
 
 const NavBar = () => {
-  const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(true)
+  const { data: session } = useSession()
   const [ isMounted, setIsMounted ]: [boolean, Function] = useState(false)
   const [ providers, setProviders ]: [any, Function] = useState(null)
 
@@ -42,14 +42,15 @@ const NavBar = () => {
         { isMounted && (
             <>
                 <DesktopNav 
-                  isUserLoggedIn={isUserLoggedIn}
+                  session={session}
                   providers={providers}
                   signIn={signIn}
                 />
                 <MobileNavigation
-                  isUserLoggedIn={isUserLoggedIn}
+                  session={session}
                   providers={providers}
                   signIn={signIn}
+                  signOut={signOut}
                 />
             </>
           )

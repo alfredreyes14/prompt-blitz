@@ -3,17 +3,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 interface DesktopNavProps {
-  isUserLoggedIn: boolean,
+  session: any,
   providers: any,
   signIn: any
 }
 
-const DesktopNav = ({ isUserLoggedIn, providers, signIn }: DesktopNavProps) => {
+const DesktopNav = ({ session, providers, signIn }: DesktopNavProps) => {
   return (
     <>
       <div className="sm:flex hidden">
         {
-          isUserLoggedIn ? (
+          session?.user ? (
             <div suppressHydrationWarning={true} className="flex gap-3 md:gap-5">
               <Link
                 href="/create-prompt"
