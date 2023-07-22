@@ -28,7 +28,7 @@ const Form = ({
         {type} and share amazing prompts with the world, and let your imagination run wild with any AI-powered platform
       </p>
 
-      <form onSubmit={handleSubmit} className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism">
+      <form onSubmit={e => handleSubmit(e)} className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism">
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Your AI Prompt
@@ -71,7 +71,7 @@ const Form = ({
             disabled={submitting} 
             className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white"
           >
-            Create
+            { type }
           </button>
         </div>
       </form>
