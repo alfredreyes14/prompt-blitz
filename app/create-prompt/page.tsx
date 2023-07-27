@@ -5,17 +5,18 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
 import Form from "@components/Form"
+import PromptType from "@types/prompt"
 
-const CreatePrompt = () => {
+const CreatePrompt: Function = (): React.ReactNode => {
   const { data: session } = useSession()
   const router = useRouter()
-  const [ submitting, setSubmitting ] = useState(false)
-  const [ post, setPost ] = useState({
+  const [ submitting, setSubmitting ]: [boolean, Function] = useState(false)
+  const [ post, setPost ]: [ PromptType, Function ] = useState({
     prompt: '',
     tag: ''
   })
 
-  const createPrompt = async (event: Event) => {
+  const createPrompt = async (event: Event): Promise<void> => {
     event.preventDefault()
     setSubmitting(true)
 
@@ -24,7 +25,7 @@ const CreatePrompt = () => {
         method: 'POST',
         body: JSON.stringify({
           ...post,
-          userId: session?.user.id
+          userId: session?.user?.id
         })
       })
       setSubmitting(false)

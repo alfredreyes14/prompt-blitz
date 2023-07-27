@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 
 import Profile from '@components/Profile'
 
-const MyProfile = () => {
+const MyProfile: Function = (): React.ReactNode => {
   const router = useRouter()
   const [ posts, setPosts ] = useState([])
   const { data: session } = useSession()
