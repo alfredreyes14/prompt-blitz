@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
 import Form from "@components/Form"
-import PromptType from "@types/prompt"
+import { PromptType } from "@customTypes/prompt"
 
 const CreatePrompt: Function = (): React.ReactNode => {
   const { data: session } = useSession()

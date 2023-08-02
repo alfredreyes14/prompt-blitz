@@ -13,7 +13,7 @@ const MyProfile: Function = (): React.ReactNode => {
   const [ posts, setPosts ] = useState([])
   const { data: session } = useSession()
 
-  const handleDelete = async (postId: any) => {
+  const handleDelete: Function = async (postId: any): Promise<void> => {
     const hasConfirmed = confirm('Do you want to delete this prompt')
 
     if (!hasConfirmed) return
@@ -28,7 +28,7 @@ const MyProfile: Function = (): React.ReactNode => {
     }
   }
 
-  const handleEdit = (post) => {
+  const handleEdit: Function = (post): void => {
     router.push(`/update-prompt?id=${post._id}`)
   }
   

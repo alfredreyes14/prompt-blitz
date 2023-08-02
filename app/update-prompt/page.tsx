@@ -2,26 +2,28 @@
 
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation"
 
 import Form from "@components/Form"
+import { PromptType } from "@customTypes/prompt"
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context"
 
-const EditPrompt = () => {
+const EditPrompt: Function = (): React.ReactNode => {
   const { data: session } = useSession()
-  const router = useRouter()
-  const [ submitting, setSubmitting ] = useState(false)
-  const [ post, setPost ] = useState({
+  const router: AppRouterInstance = useRouter()
+  const [ submitting, setSubmitting ]: [ boolean, Function ] = useState(false)
+  const [ post, setPost ]: [ PromptType, Function ] = useState({
     prompt: '',
     tag: ''
   })
-  const searchParams = useSearchParams()
-  const promptId = searchParams.get('id')
+  const searchParams: ReadonlyURLSearchParams = useSearchParams()
+  const promptId: string | null = searchParams.get('id')
 
   useEffect(() => {
     (async () => {
       if (!promptId) return
-      const details = await fetch(`/api/prompt/${promptId}`)
-      const data = await details.json()
+      const details: Response = await fetch(`/api/prompt/${promptId}`)
+      const data: PromptType = await details.json()
 
       setPost({ prompt: data.prompt, tag: data.tag })
     })();
@@ -34,7 +36,7 @@ const EditPrompt = () => {
     }
   }, [ promptId ]) 
 
-  const updatePrompt = async (event: Event) => {
+  const updatePrompt: Function = async (event: Event): Promise<void> => {
     event.preventDefault()
     setSubmitting(true)
     if (!promptId) return

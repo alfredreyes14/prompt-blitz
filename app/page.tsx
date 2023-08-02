@@ -1,6 +1,6 @@
 import Feed from "@components/Feed"
 
-const Home = () => {
+const Home: Function = (): React.ReactNode => {
   return (
     <>
       <section className="w-full flex-center flex-col">
