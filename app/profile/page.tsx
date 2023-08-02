@@ -7,9 +7,10 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 import Profile from '@components/Profile'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 
-const MyProfile: Function = (): React.ReactNode => {
-  const router = useRouter()
+const MyProfile = (): React.ReactNode => {
+  const router: AppRouterInstance = useRouter()
   const [ posts, setPosts ] = useState([])
   const { data: session } = useSession()
 
@@ -28,7 +29,7 @@ const MyProfile: Function = (): React.ReactNode => {
     }
   }
 
-  const handleEdit: Function = (post): void => {
+  const handleEdit: Function = (post: any): void => {
     router.push(`/update-prompt?id=${post._id}`)
   }
   

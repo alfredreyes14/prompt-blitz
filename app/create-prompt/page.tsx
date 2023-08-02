@@ -6,17 +6,18 @@ import { useRouter } from "next/navigation"
 
 import Form from "@components/Form"
 import { PromptType } from "@customTypes/prompt"
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context"
 
-const CreatePrompt: Function = (): React.ReactNode => {
+const CreatePrompt = (): React.ReactNode => {
   const { data: session } = useSession()
-  const router = useRouter()
+  const router: AppRouterInstance = useRouter()
   const [ submitting, setSubmitting ]: [boolean, Function] = useState(false)
   const [ post, setPost ]: [ PromptType, Function ] = useState({
     prompt: '',
     tag: ''
   })
 
-  const createPrompt = async (event: Event): Promise<void> => {
+  const createPrompt: Function = async (event: Event): Promise<void> => {
     event.preventDefault()
     setSubmitting(true)
 

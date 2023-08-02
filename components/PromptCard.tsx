@@ -2,21 +2,28 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { useSession } from "next-auth/react"
+import { SessionContextValue, useSession } from "next-auth/react"
 import { usePathname, useRouter } from "next/navigation"
+
+interface PromptCardProps {
+  post: any,
+  handleTagClick?: Function,
+  handleEdit?: Function,
+  handleDelete?: Function,
+}
 
 const PromptCard = ({
   post,
   handleTagClick,
   handleEdit,
   handleDelete
-}) => {
-  const [ copied, setCopied ] = useState('')
-  const { data: session } = useSession()
-  const pathName = usePathname()
-  const router = useRouter()
+}: PromptCardProps): React.ReactNode => {
+  const [ copied, setCopied ]: [ string, Function ] = useState('')
+  const { data: session }: SessionContextValue = useSession()
+  const pathName: string = usePathname()
+  // const router = useRouter()
 
-  const handleCopy = () => {
+  const handleCopy: Function = (): void => {
     setCopied(post.prompt)
     navigator.clipboard.writeText(post.prompt)
     setTimeout(() => setCopied(""), 3000)
@@ -46,6 +53,7 @@ const PromptCard = ({
               ? '/assets/icons/tick.svg' 
               : 'assets/icons/copy.svg'
             }
+            alt="CTA"
             width={12}
             height={12}
           />
@@ -54,7 +62,7 @@ const PromptCard = ({
 
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <p className="font-inter text-sm blue_gradient cursor-pointer" onClick={() => handleTagClick && handleTagClick(post.tag)}>{post.tag}</p>
-      {session?.user.id === post.creator._id && pathName === '/profile' && (
+      {session?.user?.id === post.creator._id && pathName === '/profile' && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p className="font-inter text-sm green_gradient cursor-pointer" onClick={() => handleEdit()}>Edit</p>
           <p className="font-inter text-sm cursor-pointer" onClick={() => handleDelete()}>Delete</p>

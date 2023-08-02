@@ -4,19 +4,20 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
+import { signIn, signOut, useSession, getProviders, SessionContextValue, LiteralUnion, ClientSafeProvider } from 'next-auth/react'
 
 import DesktopNav from './DesktopNavigation'
 import MobileNavigation from './MobileNavigation'
+import { BuiltInProviderType } from 'next-auth/providers'
 
-const NavBar = () => {
-  const { data: session } = useSession()
+const NavBar = (): React.ReactNode => {
+  const { data: session }: SessionContextValue = useSession()
   const [ isMounted, setIsMounted ]: [boolean, Function] = useState(false)
   const [ providers, setProviders ]: [any, Function] = useState(null)
 
   useEffect(() => {
     (async () => {
-      const response = await getProviders()
+      const response: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null = await getProviders()
 
       setProviders(response)
     })();

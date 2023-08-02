@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -9,8 +9,8 @@ interface MobileNaveProps {
   signOut: Function
 }
 
-const MobileNavigation = ({ session, providers, signIn, signOut }: MobileNaveProps) => {
-  const [ toggleDropdown, setToggleDropdown ] = React.useState(false)
+const MobileNavigation = ({ session, providers, signIn, signOut }: MobileNaveProps): React.ReactNode => {
+  const [ toggleDropdown, setToggleDropdown ]: [ boolean, Function ] = useState(false)
 
   return (
     <>
@@ -25,7 +25,7 @@ const MobileNavigation = ({ session, providers, signIn, signOut }: MobileNavePro
                     height={37}
                     className="rounded-full"
                     alt="profile"
-                    onClick={() => setToggleDropdown(prev => !prev)}
+                    onClick={() => setToggleDropdown((prev: boolean) => !prev)}
                   />
 
                   {toggleDropdown && (

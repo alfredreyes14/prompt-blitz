@@ -8,7 +8,7 @@ import Form from "@components/Form"
 import { PromptType } from "@customTypes/prompt"
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context"
 
-const EditPrompt: Function = (): React.ReactNode => {
+const EditPrompt = (): React.ReactNode => {
   const { data: session } = useSession()
   const router: AppRouterInstance = useRouter()
   const [ submitting, setSubmitting ]: [ boolean, Function ] = useState(false)

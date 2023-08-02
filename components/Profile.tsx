@@ -18,8 +18,6 @@ const Profile = ({
   handleEdit,
   handleDelete
 }: ReusableProfile): React.ReactNode => {
-  console.log(data)
-
   return (
     <section className="w-full">
       <h1 className="head_text text-left">

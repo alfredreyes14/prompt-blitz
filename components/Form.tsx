@@ -1,8 +1,12 @@
+import { PromptType } from "@customTypes/prompt"
 import Link from "next/link"
 
-interface InputValue {
-  prompt?: string | undefined,
-  tag?: string | undefined
+interface FormProps {
+  type: string,
+  post: PromptType,
+  setPost: Function,
+  submitting: boolean,
+  handleSubmit: Function
 }
 
 const Form = ({
@@ -11,10 +15,10 @@ const Form = ({
   setPost,
   submitting,
   handleSubmit,
-}) => {
+}: FormProps): React.ReactNode => {
 
-  const handleSetPost: Function = (value: InputValue, key: string): void => {
-    setPost((prev: any) => {
+  const handleSetPost: Function = (value: PromptType, key: string): void => {
+    setPost((prev: PromptType) => {
       return { ...prev, [key]: value}
     })
   }

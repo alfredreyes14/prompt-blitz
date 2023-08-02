@@ -1,33 +1,42 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, ChangeEventHandler, ChangeEvent } from "react"
 
 import PromptCard from "./PromptCard"
+import { PromptType } from "@customTypes/prompt"
 
-const Feed = () => {
-  const [ searchText, setSearchText ] = useState('')
+interface CardListProps {
+  data: PromptType[],
+  handleTagClick: Function
+}
+
+
+const Feed: Function = (): React.ReactNode => {
+  const [ searchText, setSearchText ]: [ string, Function ] = useState('')
   const [ posts, setPosts ] = useState([])
 
-  const PromptCardList = ({ data, handleTagClick }) => (
+  const PromptCardList = ({ data, handleTagClick }: CardListProps) => (
     <div className="mt-16 prompt_layout">
       { data.map(item => (
         <PromptCard
           key={item._id}
           post={item}
           handleTagClick={handleTagClick}
+          handleDelete={() => {}}
+          handleEdit={() => {}}
         />
       )) }
     </div>
   )
   
-  const handleSearchChange = e => {
-    
+  const handleSearchChange: ChangeEventHandler = (event: ChangeEvent) => {
+    console.log(event.target)
   }
 
   useEffect(() => {
     (async () => {
-      const response = await fetch('/api/prompt')
-      const data = await response.json()
+      const response: Response = await fetch('/api/prompt')
+      const data: any = await response.json()
 
       setPosts(data)
     })();
@@ -41,7 +50,7 @@ const Feed = () => {
           className="search_input peer"
           placeholder="Search for a tag or a username"
           value={searchText}
-          onChange={handleSearchChange}
+          onChange={(event: ChangeEvent) => handleSearchChange(event)}
           required
         />
       </form>

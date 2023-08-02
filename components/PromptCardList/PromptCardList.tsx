@@ -6,7 +6,7 @@ interface PromptCardList {
   handleTagClick: Function
 }
 
-const PromptCardList = ({ data, handleTagClick }: PromptCardList): React.ReactNode => {
+const PromptCardList: Function = ({ data, handleTagClick }: PromptCardList): React.ReactNode => {
   return (
     <div className="mt-16 prompt_layout">
       { data.map(item => (
