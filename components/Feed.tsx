@@ -11,7 +11,7 @@ interface CardListProps {
 }
 
 
-const Feed: Function = (): React.ReactNode => {
+const Feed = (): React.ReactNode => {
   const [ searchText, setSearchText ]: [ string, Function ] = useState('')
   const [ posts, setPosts ] = useState([])
 
@@ -29,8 +29,9 @@ const Feed: Function = (): React.ReactNode => {
     </div>
   )
   
-  const handleSearchChange: ChangeEventHandler = (event: ChangeEvent) => {
-    console.log(event.target)
+  const handleSearchChange: ChangeEventHandler = (event: ChangeEvent<Element>) => {
+    setSearchText(event.target.value)
+    console.log(event.target.value)
   }
 
   useEffect(() => {

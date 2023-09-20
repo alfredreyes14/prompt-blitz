@@ -42,3 +42,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - [ ] Search by username
 - [ ] Click on tag
 - [ ] View other profiles
+- [ ] Context usecase
