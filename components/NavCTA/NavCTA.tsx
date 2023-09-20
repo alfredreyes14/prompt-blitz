@@ -1,20 +1,25 @@
-import { useState } from 'react'
+import { memo, useState } from "react"
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface MobileNaveProps {
+interface NavCTAProps {
   session: any,
   providers: any,
   signIn: Function,
   signOut: Function
 }
 
-const MobileNavigation = ({ session, providers, signIn, signOut }: MobileNaveProps): React.ReactNode => {
+const NavigationActions = ({
+  session, 
+  providers, 
+  signIn, 
+  signOut 
+}: NavCTAProps): React.ReactNode => {
   const [ toggleDropdown, setToggleDropdown ]: [ boolean, Function ] = useState(false)
 
   return (
     <>
-      <div className="sm:hidden flex relative">
+      <div className="flex relative">
         {
           session?.user
             ? (
@@ -80,4 +85,6 @@ const MobileNavigation = ({ session, providers, signIn, signOut }: MobileNavePro
   )
 }
 
-export default MobileNavigation
+const NavCTA = memo(NavigationActions)
+
+export default NavCTA

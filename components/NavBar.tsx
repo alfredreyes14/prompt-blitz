@@ -6,13 +6,11 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession, getProviders, SessionContextValue, LiteralUnion, ClientSafeProvider } from 'next-auth/react'
 
-import DesktopNav from './DesktopNavigation'
-import MobileNavigation from './MobileNavigation'
 import { BuiltInProviderType } from 'next-auth/providers'
+import NavCTA from './NavCTA'
 
 const NavBar = (): React.ReactNode => {
   const { data: session }: SessionContextValue = useSession()
-  const [ isMounted, setIsMounted ]: [boolean, Function] = useState(false)
   const [ providers, setProviders ]: [any, Function] = useState(null)
 
   useEffect(() => {
@@ -22,7 +20,6 @@ const NavBar = (): React.ReactNode => {
       setProviders(response)
     })();
 
-    setIsMounted(true)
   }, [])
 
   return (
@@ -40,18 +37,13 @@ const NavBar = (): React.ReactNode => {
         />
         <p className="logo_text">Promptopia</p>
 
-        { isMounted && (
+        { providers && (
             <>
-                <DesktopNav 
+                <NavCTA
                   session={session}
                   providers={providers}
                   signIn={signIn}
-                />
-                <MobileNavigation
-                  session={session}
-                  providers={providers}
-                  signIn={signIn}
-                  signOut={signOut}
+                  signOut={signOut} 
                 />
             </>
           )
