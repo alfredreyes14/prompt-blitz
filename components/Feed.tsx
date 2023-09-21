@@ -14,6 +14,7 @@ interface CardListProps {
 const Feed = (): React.ReactNode => {
   const [ searchText, setSearchText ]: [ string, Function ] = useState('')
   const [ posts, setPosts ] = useState([])
+  const abortController: AbortController = new AbortController();
 
   const PromptCardList = ({ data, handleTagClick }: CardListProps) => (
     <div className="mt-16 prompt_layout">
@@ -28,18 +29,27 @@ const Feed = (): React.ReactNode => {
       )) }
     </div>
   )
+
+  const fetchPrompts = async () => {
+    const response: Response = await fetch(`/api/prompt?searchText=${searchText}`)
+    const data: any = await response.json()
   
-  const handleSearchChange: ChangeEventHandler = (event: ChangeEvent<Element>) => {
-    setSearchText(event.target.value)
-    console.log(event.target.value)
+    setPosts(data)
   }
 
   useEffect(() => {
+    let debounce: any = null
+    debounce = setTimeout(fetchPrompts, 500);
+    
+    return () => {
+      clearTimeout(debounce)
+      abortController.abort()
+    }
+  }, [ searchText ])
+  
+  useEffect(() => {
     (async () => {
-      const response: Response = await fetch('/api/prompt')
-      const data: any = await response.json()
-
-      setPosts(data)
+      await fetchPrompts()
     })();
   }, [])
 
@@ -51,7 +61,7 @@ const Feed = (): React.ReactNode => {
           className="search_input peer"
           placeholder="Search for a tag or a username"
           value={searchText}
-          onChange={(event: ChangeEvent) => handleSearchChange(event)}
+          onChange={(event) => setSearchText(event.target.value)}
           required
         />
       </form>

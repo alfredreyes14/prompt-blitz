@@ -37,8 +37,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Coming Soon
 
 - [ ] Search
-  - [ ] Search by prompt content
-  - [ ] Search by tag
+  - [ x ] Search by prompt content
+  - [ x ] Search by tag
   - [ ] Search by username
 - [ ] Click on tag
 - [ ] View other profiles
