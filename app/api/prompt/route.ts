@@ -16,7 +16,7 @@ export const GET = async (request: NextRequest) => {
               from: "users",
               localField: "creator",
               foreignField: "_id",
-              as: "creator_info"
+              as: "creator"
             }
           },
           {
