@@ -39,7 +39,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [ ] Search
   - [x] Search by prompt content
   - [x] Search by tag
-  - [ ] Search by username
+  - [x] Search by username
+  - [x] Search by email
 - [ ] Click on tag
 - [ ] View other profiles
 - [ ] Context usecase
