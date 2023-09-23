@@ -10,11 +10,39 @@ export const GET = async (request: NextRequest) => {
     await connectToDB()
 
     prompts = (searchText !== '')
-      ? await Prompt.find().or([ { prompt: searchText }, { tag: searchText } ]).populate('creator')
+      ? await Prompt.aggregate([
+          {
+            $lookup: {
+              from: "users",
+              localField: "creator",
+              foreignField: "_id",
+              as: "creator_info"
+            }
+          },
+          {
+            $match: {
+              $or: [
+                { prompt: { $eq: searchText } },
+                { tag: { $eq: searchText } },
+                { 'creator_info.email': searchText },
+                { 'creator_info.username': searchText }
+              ]
+            }
+          },
+          {
+            $project: {
+              _id: 1,
+              prompt: 1,
+              tag: 1,
+              creator: 1
+            }
+          }
+        ]).exec()
       : await Prompt.find({}).populate('creator')
 
     return new Response(JSON.stringify(prompts), { status: 200 })
   } catch (error) {
+    console.error(error)
     return new Response('Error in fetching prompts', { status: 500 })
   }
 }
