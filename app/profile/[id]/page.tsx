@@ -27,7 +27,7 @@ const OtherProfile = (): React.ReactNode => {
     (async () => {
       const response: Response = await fetch(`/api/users/${userId}`)
       const data: any = await response.json()
-      console.log('userDetails', data)
+      
       setUserDetails(data)
     })();
 
@@ -38,7 +38,7 @@ const OtherProfile = (): React.ReactNode => {
     (async () => {
       const response = await fetch(`/api/users/${userId}/posts`)
       const data = await response.json()
-      console.log({ data })
+
       setPosts(data)
     })();
 
