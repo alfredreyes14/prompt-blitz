@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, ChangeEventHandler, ChangeEvent } from "react"
+import { useState, useEffect } from "react"
 
 import PromptCard from "./PromptCard"
 import { PromptType } from "@customTypes/prompt"
@@ -53,6 +53,10 @@ const Feed = (): React.ReactNode => {
     })();
   }, [])
 
+  const clickTag = (prompt: any) => {
+    console.log(prompt)
+  }
+
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
@@ -68,7 +72,7 @@ const Feed = (): React.ReactNode => {
 
       <PromptCardList
         data={posts || []}
-        handleTagClick={() => {}} 
+        handleTagClick={clickTag} 
       />
     </section>
   )
