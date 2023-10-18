@@ -5,7 +5,6 @@ import { usePathname  } from 'next/navigation'
 import Profile from '@components/Profile'
 import { UserDetails } from '@customTypes/userDetails'
 import { SessionContextValue, useSession } from 'next-auth/react'
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 
 const OtherProfile = (): React.ReactNode => {
   const pathName: string = usePathname()
@@ -27,7 +26,7 @@ const OtherProfile = (): React.ReactNode => {
     (async () => {
       const response: Response = await fetch(`/api/users/${userId}`)
       const data: any = await response.json()
-      
+
       setUserDetails(data)
     })();
 

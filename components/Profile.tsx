@@ -10,7 +10,7 @@ interface ReusableProfile {
   data: object[],
   handleEdit: Function,
   handleDelete: Function,
-  userDetails?: undefined | UserDetails
+  userDetails?: undefined | UserDetails | null
 }
 
 const OwnProfile = ({
