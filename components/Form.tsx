@@ -1,5 +1,6 @@
 import { PromptType } from "@customTypes/prompt"
 import Link from "next/link"
+import { useAppProvider } from "@context/AppProvider"
 
 interface FormProps {
   type: string,
@@ -16,7 +17,7 @@ const Form = ({
   submitting,
   handleSubmit,
 }: FormProps): React.ReactNode => {
-
+  const { previousRoute } = useAppProvider()
   const handleSetPost: Function = (value: PromptType, key: string): void => {
     setPost((prev: PromptType) => {
       return { ...prev, [key]: value}
@@ -64,7 +65,7 @@ const Form = ({
 
         <div className="flex-end mx-3 mb-5 gap-4">
           <Link
-            href="/"
+            href={previousRoute || "/"}
             className="text-gray-500 text-sm" 
           >
             Cancel

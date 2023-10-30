@@ -1,6 +1,7 @@
 import '@styles/globals.css'
 import NavBar from '@components/NavBar'
 import Provider from '@components/Provider'
+import { AppProvider } from '@context/AppProvider'
 
 interface PropsInterface {
   children: React.ReactNode
@@ -16,14 +17,16 @@ const RootLayout = ({ children }: PropsInterface): React.ReactNode => {
     <html lang="en">
     <body>
       <Provider>
-        <div className="main">
-          <div className="gradient"></div>
-        </div>
+        <AppProvider>
+          <div className="main">
+            <div className="gradient"></div>
+          </div>
 
-        <main className="app">
-          <NavBar />
-          { children }
-        </main>
+          <main className="app">
+            <NavBar />
+            { children }
+          </main>
+        </AppProvider>
       </Provider>
     </body>
     </html>

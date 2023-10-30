@@ -19,7 +19,7 @@ const Profile = ({
   userDetails = undefined
 }: ReusableProfile): React.ReactNode => {
   const { data: session }: SessionContextValue = useSession()
-
+  console.log({ userDetails})
   return (
     <section className="w-full">
       <div className="flex justify-center">
@@ -34,7 +34,7 @@ const Profile = ({
               onClick={() => {}}
             />
           </div>
-          <span className="mt-2 text-2xl">{ userDetails?.username }</span>
+          <span className="mt-2 text-2xl">{ userDetails?.username || userDetails?.name }</span>
         </div>
       </div>
       <p className="desc text-left">Prompts</p>
