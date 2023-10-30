@@ -6,8 +6,6 @@ import { UserDetails } from "@customTypes/userDetails"
 import Image from 'next/image'
 
 interface ReusableProfile {
-  name: string,
-  desc: string,
   data: object[],
   handleEdit: Function,
   handleDelete: Function,
@@ -15,14 +13,11 @@ interface ReusableProfile {
 }
 
 const Profile = ({
-  name,
-  desc,
   data,
   handleEdit,
   handleDelete,
   userDetails = undefined
 }: ReusableProfile): React.ReactNode => {
-  console.log(userDetails)
   return (
     <section className="w-full">
       <div className="flex justify-center">
