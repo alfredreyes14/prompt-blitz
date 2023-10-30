@@ -52,7 +52,7 @@ const Feed = (): React.ReactNode => {
 
       <PromptCardList
         data={posts || []}
-        handleTagClick={clickTag} 
+        handleTagClick={clickTag}
       />
     </section>
   )

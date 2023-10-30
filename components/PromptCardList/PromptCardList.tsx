@@ -1,5 +1,6 @@
 import React from 'react'
 import PromptCard from '@components/PromptCard'
+import User from '@customTypes/user'
 
 interface PromptCardList {
   data: any[],
@@ -16,6 +17,7 @@ const PromptCardList = ({ data, handleTagClick }: PromptCardList): React.ReactNo
           handleTagClick={handleTagClick}
           handleEdit={() => {}}
           handleDelete={() => {}}
+          isPromptCreatedByLoggedUser
         />
       ))}
     </div>

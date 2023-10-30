@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import PromptCard from "./PromptCard"
 import { UserDetails } from "@customTypes/userDetails"
 import Image from 'next/image'
+import { SessionContextValue, useSession } from "next-auth/react"
 
 interface ReusableProfile {
   data: object[],
@@ -18,6 +18,8 @@ const Profile = ({
   handleDelete,
   userDetails = undefined
 }: ReusableProfile): React.ReactNode => {
+  const { data: session }: SessionContextValue = useSession()
+
   return (
     <section className="w-full">
       <div className="flex justify-center">
@@ -43,7 +45,8 @@ const Profile = ({
             post={post}
             handleTagClick={() => {}}
             handleEdit={() => handleEdit && handleEdit(post)}
-            handleDelete={() => handleDelete && handleDelete(post._id)} 
+            handleDelete={() => handleDelete && handleDelete(post._id)}
+            isPromptCreatedByLoggedUser={session?.user?.id === post.creator._id}
           />
         ))}
       </div>

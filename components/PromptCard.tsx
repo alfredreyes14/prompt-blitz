@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { SessionContextValue, useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
 
 interface PromptCardProps {
@@ -10,16 +9,17 @@ interface PromptCardProps {
   handleTagClick?: Function,
   handleEdit?: Function,
   handleDelete?: Function,
+  isPromptCreatedByLoggedUser: boolean
 }
 
 const PromptCard = ({
   post,
   handleTagClick,
   handleEdit,
-  handleDelete
+  handleDelete,
+  isPromptCreatedByLoggedUser = false
 }: PromptCardProps): React.ReactNode => {
   const [ copied, setCopied ]: [ string, Function ] = useState('')
-  const { data: session }: SessionContextValue = useSession()
   const pathName: string = usePathname()
 
   const handleCopy: Function = (): void => {
@@ -61,7 +61,7 @@ const PromptCard = ({
 
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <p className="font-inter text-sm blue_gradient cursor-pointer">{post.tag}</p>
-      {session?.user?.id === post.creator._id && pathName === '/profile' && (
+      {isPromptCreatedByLoggedUser && pathName.includes('/profile') && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p className="font-inter text-sm green_gradient cursor-pointer" onClick={() => handleEdit()}>Edit</p>
           <p className="font-inter text-sm cursor-pointer" onClick={() => handleDelete()}>Delete</p>
