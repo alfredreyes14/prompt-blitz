@@ -2,33 +2,13 @@
 
 import { useState, useEffect } from "react"
 
-import PromptCard from "./PromptCard"
-import { PromptType } from "@customTypes/prompt"
-
-interface CardListProps {
-  data: PromptType[],
-  handleTagClick: Function
-}
+import PromptCardList from "./PromptCardList"
 
 
 const Feed = (): React.ReactNode => {
   const [ searchText, setSearchText ]: [ string, Function ] = useState('')
   const [ posts, setPosts ] = useState([])
   const abortController: AbortController = new AbortController();
-
-  const PromptCardList = ({ data, handleTagClick }: CardListProps) => (
-    <div className="mt-16 prompt_layout">
-      { data.map(item => (
-        <PromptCard
-          key={item._id}
-          post={item}
-          handleTagClick={handleTagClick}
-          handleDelete={() => {}}
-          handleEdit={() => {}}
-        />
-      )) }
-    </div>
-  )
 
   const fetchPrompts = async () => {
     const response: Response = await fetch(`/api/prompt?searchText=${searchText}`)
