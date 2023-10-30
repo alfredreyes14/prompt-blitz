@@ -42,5 +42,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - [x] Search by username
   - [x] Search by email
 - [ ] Click on tag
-- [ ] View other profiles
-- [ ] Context usecase
+- [x] View other profiles
+- [x] Context usecase
