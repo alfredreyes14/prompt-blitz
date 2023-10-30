@@ -32,7 +32,7 @@ const MyProfile = (): React.ReactNode => {
   const handleEdit: Function = (post: any): void => {
     router.push(`/update-prompt?id=${post._id}`)
   }
-  
+
   useEffect(() => {
     if (!session?.user.id) return
     (async () => {
@@ -49,6 +49,7 @@ const MyProfile = (): React.ReactNode => {
       data={posts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
+      userDetails={session?.user}
     />
   )
 }

@@ -25,7 +25,7 @@ const NavBar = (): React.ReactNode => {
   return (
     <nav className='flex justify-between w-full mb-16 pt-3'>
       <Link 
-          href="#" 
+          href="/" 
           className="flex gap-3"
         >
           <Image 
