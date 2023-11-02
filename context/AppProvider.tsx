@@ -3,17 +3,21 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { usePreviousRoute } from '@hooks/prevRoute'
 import { SessionContextValue, useSession } from 'next-auth/react'
+import { usePromptActions } from '@hooks/promptActions'
 
 interface AppProviderType {
   children: React.ReactNode
 }
 
-const AppContext = createContext({})
+export const AppContext = createContext({})
 
 export const AppProvider = ({ children }: AppProviderType) => {
   const previousRoute = usePreviousRoute()
   const { data: session }: SessionContextValue = useSession()
   const [ prompts, setPrompts ] = useState([])
+  const [ searchText, setSearchText ] = useState('')
+  const { handleSearchPrompts } = usePromptActions()
+  const abortController: AbortController = new AbortController();
 
   useEffect(() => {
     if (!session) return
@@ -23,9 +27,21 @@ export const AppProvider = ({ children }: AppProviderType) => {
 
       setPrompts(prompts)
     })();
-  }, [ session ])
+  }, [ session?.user.id ])
 
-  return (<AppContext.Provider value={{ previousRoute, session }}>{ children }</AppContext.Provider>)
+  return (
+    <AppContext.Provider 
+      value={{
+        previousRoute, 
+        session,
+        prompts,
+        searchText,
+        setSearchText
+      }}
+    >
+        { children }
+      </AppContext.Provider>
+  )
 }
 
 export const useAppProvider = (): any => {

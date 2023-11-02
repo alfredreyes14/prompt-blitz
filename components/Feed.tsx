@@ -3,36 +3,37 @@
 import { useState, useEffect } from "react"
 
 import PromptCardList from "./PromptCardList"
+import { useAppProvider } from "@context/AppProvider"
 
 
 const Feed = (): React.ReactNode => {
-  const [ searchText, setSearchText ]: [ string, Function ] = useState('')
-  const [ posts, setPosts ] = useState([])
-  const abortController: AbortController = new AbortController();
+  const { 
+    prompts: allLoggedUserPrompts, 
+    searchText,
+    setSearchText 
+  } = useAppProvider()
 
-  const fetchPrompts = async () => {
-    const response: Response = await fetch(`/api/prompt?searchText=${searchText}`)
-    const data: any = await response.json()
+  // const fetchPrompts = async () => {
+  //   const response: Response = await fetch(`/api/prompt?searchText=${searchText}`)
+  //   const data: any = await response.json()
   
-    setPosts(data)
-  }
+  //   setPrompts(data)
+  // }
 
-  useEffect(() => {
-    let debounce: any = null
-    debounce = setTimeout(fetchPrompts, 500);
+  // useEffect(() => {
+  //   if (searchText === '') {
+  //     setPrompts(allLoggedUserPrompts)
+  //     return
+  //   }
+  //   let debounce: any = null
+  //   debounce = setTimeout(fetchPrompts, 500);
     
-    return () => {
-      clearTimeout(debounce)
-      abortController.abort()
-    }
-  }, [ searchText ])
+  //   return () => {
+  //     clearTimeout(debounce)
+  //     abortController.abort()
+  //   }
+  // }, [ searchText ])
   
-  useEffect(() => {
-    (async () => {
-      await fetchPrompts()
-    })();
-  }, [])
-
   const clickTag = (prompt: any) => {
     console.log(prompt)
   }
@@ -51,7 +52,7 @@ const Feed = (): React.ReactNode => {
       </form>
 
       <PromptCardList
-        data={posts || []}
+        data={allLoggedUserPrompts || []}
         handleTagClick={clickTag}
       />
     </section>

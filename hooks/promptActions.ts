@@ -1,3 +1,4 @@
+import { PromptType } from './../customTypes/prompt.d';
 import { useState } from "react"
 import { useAppProvider } from "@context/AppProvider"
 import { useRouter } from "next/navigation"
@@ -30,9 +31,17 @@ export const usePromptActions = () => {
     }
   }
 
+  const handleSearchPrompts: Function = async (searchText: string): Promise<PromptType[]> => {
+    const response: Response = await fetch(`/api/prompt?searchText=${searchText}`)
+    const data: any = await response.json()
+  
+    return data
+  }
+
   return {
     handleSubmit,
     submitting,
-    setSubmitting
+    setSubmitting,
+    handleSearchPrompts
   }
 }
