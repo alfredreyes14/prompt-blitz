@@ -19,7 +19,7 @@ const Profile = ({
   userDetails = undefined
 }: ReusableProfile): React.ReactNode => {
   const { data: session }: SessionContextValue = useSession()
-  console.log({ userDetails})
+
   return (
     <section className="w-full">
       <div className="flex justify-center">
