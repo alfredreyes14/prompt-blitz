@@ -23,7 +23,7 @@ const NavBar = (): React.ReactNode => {
   }, [])
 
   return (
-    <nav className='flex justify-between w-full mb-16 pt-3'>
+    <nav className='flex justify-between sticky top-0 z-50 w-full mb-16 pt-3'>
       <Link 
           href="/" 
           className="flex gap-3"
