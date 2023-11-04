@@ -8,6 +8,7 @@ import { signIn, signOut, useSession, getProviders, SessionContextValue, Literal
 
 import { BuiltInProviderType } from 'next-auth/providers'
 import NavCTA from './NavCTA'
+import { RoundSkeleton } from './Skeleton'
 
 const NavBar = (): React.ReactNode => {
   const { data: session }: SessionContextValue = useSession()
@@ -38,6 +39,7 @@ const NavBar = (): React.ReactNode => {
           <p className="logo_text">Promptopia</p>
         </Link>
         <div className="cursor-pointer">
+          { !providers && <RoundSkeleton /> }
           { providers && (
                 <>
                     <NavCTA
