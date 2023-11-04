@@ -3,7 +3,7 @@
 import PromptCard from "./PromptCard"
 import { UserDetails } from "@customTypes/userDetails"
 import Image from 'next/image'
-import { SessionContextValue, useSession } from "next-auth/react"
+import { useAppProvider } from "@context/AppProvider"
 
 interface ReusableProfile {
   data: object[],
@@ -18,8 +18,8 @@ const Profile = ({
   handleDelete,
   userDetails = undefined
 }: ReusableProfile): React.ReactNode => {
-  const { data: session }: SessionContextValue = useSession()
-
+  const { session } = useAppProvider()
+  
   return (
     <section className="w-full">
       <div className="flex justify-center">
