@@ -35,7 +35,7 @@ export const usePromptActions = () => {
     const response: Response = await fetch(`/api/prompt?searchText=${searchText}`)
     const data: any = await response.json()
   
-    return data
+    return data || []
   }
 
   return {

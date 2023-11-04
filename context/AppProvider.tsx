@@ -15,9 +15,6 @@ export const AppProvider = ({ children }: AppProviderType) => {
   const previousRoute = usePreviousRoute()
   const { data: session }: SessionContextValue = useSession()
   const [ prompts, setPrompts ] = useState([])
-  const [ searchText, setSearchText ] = useState('')
-  const { handleSearchPrompts } = usePromptActions()
-  const abortController: AbortController = new AbortController();
 
   useEffect(() => {
     if (!session) return
@@ -34,9 +31,7 @@ export const AppProvider = ({ children }: AppProviderType) => {
       value={{
         previousRoute, 
         session,
-        prompts,
-        searchText,
-        setSearchText
+        prompts
       }}
     >
         { children }

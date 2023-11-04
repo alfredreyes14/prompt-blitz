@@ -4,36 +4,39 @@ import { useState, useEffect } from "react"
 
 import PromptCardList from "./PromptCardList"
 import { useAppProvider } from "@context/AppProvider"
+import { usePromptActions } from "@hooks/promptActions"
+import { PromptType } from "@customTypes/prompt"
 
 
 const Feed = (): React.ReactNode => {
   const { 
-    prompts: allLoggedUserPrompts, 
-    searchText,
-    setSearchText 
+    prompts: allLoggedUserPrompts
   } = useAppProvider()
+  const [ searchText, setSearchText ] = useState('')
+  const [ displayPrompts, setDisplayPrompts ] = useState(allLoggedUserPrompts)
+  const abortController: AbortController = new AbortController();
+  const { handleSearchPrompts } = usePromptActions()
 
-  // const fetchPrompts = async () => {
-  //   const response: Response = await fetch(`/api/prompt?searchText=${searchText}`)
-  //   const data: any = await response.json()
+  const fetchPrompts = async (): Promise<void> => {
+    const data: PromptType[] | [] = await handleSearchPrompts(searchText)
   
-  //   setPrompts(data)
-  // }
+    setDisplayPrompts(data)
+  }
 
-  // useEffect(() => {
-  //   if (searchText === '') {
-  //     setPrompts(allLoggedUserPrompts)
-  //     return
-  //   }
-  //   let debounce: any = null
-  //   debounce = setTimeout(fetchPrompts, 500);
+  useEffect(() => {
+    if (searchText === '') {
+      setDisplayPrompts(allLoggedUserPrompts)
+      return
+    }
+    let debounce: any = null
+    debounce = setTimeout(fetchPrompts, 500);
     
-  //   return () => {
-  //     clearTimeout(debounce)
-  //     abortController.abort()
-  //   }
-  // }, [ searchText ])
-  
+    return () => {
+      clearTimeout(debounce)
+      abortController.abort()
+    }
+  }, [ searchText, allLoggedUserPrompts ])
+
   const clickTag = (prompt: any) => {
     console.log(prompt)
   }
@@ -52,7 +55,7 @@ const Feed = (): React.ReactNode => {
       </form>
 
       <PromptCardList
-        data={allLoggedUserPrompts || []}
+        data={displayPrompts}
         handleTagClick={clickTag}
       />
     </section>
