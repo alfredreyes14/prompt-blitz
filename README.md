@@ -48,4 +48,3 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - [ ] Favorite Prompt
   - [ ] Display Favorite Prompt in Dashboard
 - [ ] Skeleton Loader
-- [ ] getServerSideProps and getStaticProps use case
