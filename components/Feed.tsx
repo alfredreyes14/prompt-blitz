@@ -50,6 +50,11 @@ const Feed = (): React.ReactNode => {
           placeholder="Search for a tag or a username"
           value={searchText}
           onChange={(event) => setSearchText(event.target.value)}
+          onKeyDown={event => {
+            if (event.key === 'Enter') {
+              event.preventDefault()
+            }
+          }}
           required
         />
       </form>
