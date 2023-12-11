@@ -17,14 +17,13 @@ export const AppProvider = ({ children }: AppProviderType) => {
   const [ prompts, setPrompts ] = useState([])
 
   useEffect(() => {
-    if (!session) return
     (async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/posts`)
+      const response = await fetch(`/api/prompt`)
       const prompts = await response.json()
 
       setPrompts(prompts)
     })();
-  }, [ session?.user.id ])
+  }, [])
 
   return (
     <AppContext.Provider 

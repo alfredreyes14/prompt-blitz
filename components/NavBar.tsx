@@ -24,10 +24,10 @@ const NavBar = (): React.ReactNode => {
   }, [])
 
   return (
-    <nav className='flex justify-between sticky top-0 z-50 w-full mb-16 pt-3'>
-      <Link 
+    <nav className='nav-style flex justify-between sticky top-0 z-50 w-full mb-16 pt-3 pb-4'>
+        <Link 
           href="/" 
-          className="flex gap-3"
+          className="flex gap-3 sm:px-5 md:px-10 lg:px-20"
         >
           <Image 
             alt="logo" 
@@ -38,7 +38,7 @@ const NavBar = (): React.ReactNode => {
           />
           <p className="logo_text">Promptopia</p>
         </Link>
-        <div className="cursor-pointer">
+        <div className="cursor-pointer sm:px-5 md:px-10 lg:px-20">
           { !providers && <RoundSkeleton /> }
           { providers && (
                 <>

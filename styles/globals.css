@@ -14,7 +14,6 @@
   position: fixed;
   display: flex;
   justify-content: center;
-  padding: 120px 24px 160px 24px;
   pointer-events: none;
 }
 
@@ -38,6 +37,11 @@
   top: 0;
   opacity: 0.4;
   filter: invert(1);
+}
+
+.nav-style {
+  background-color: whitesmoke;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .gradient {
@@ -74,7 +78,7 @@
 /* Tailwind Styles */
 
 .app {
-  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+  @apply relative z-10 flex justify-center items-center flex-col mx-auto sm:px-0;
 }
 
 .black_btn {

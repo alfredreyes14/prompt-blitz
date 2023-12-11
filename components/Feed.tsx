@@ -10,10 +10,10 @@ import { PromptType } from "@customTypes/prompt"
 
 const Feed = (): React.ReactNode => {
   const { 
-    prompts: allLoggedUserPrompts
+    prompts
   } = useAppProvider()
   const [ searchText, setSearchText ] = useState('')
-  const [ displayPrompts, setDisplayPrompts ] = useState(allLoggedUserPrompts)
+  const [ displayPrompts, setDisplayPrompts ] = useState(prompts)
   const abortController: AbortController = new AbortController();
   const { handleSearchPrompts } = usePromptActions()
 
@@ -25,7 +25,7 @@ const Feed = (): React.ReactNode => {
 
   useEffect(() => {
     if (searchText === '') {
-      setDisplayPrompts(allLoggedUserPrompts)
+      setDisplayPrompts(prompts)
       return
     }
     let debounce: any = null
@@ -35,7 +35,7 @@ const Feed = (): React.ReactNode => {
       clearTimeout(debounce)
       abortController.abort()
     }
-  }, [ searchText, allLoggedUserPrompts ])
+  }, [ searchText, prompts ])
 
   const clickTag = (prompt: any) => {
     console.log(prompt)
