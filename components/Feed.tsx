@@ -17,12 +17,14 @@ const Feed = (): React.ReactNode => {
   } = useAppProvider()
   const [ searchText, setSearchText ] = useState('')
   const [ displayPrompts, setDisplayPrompts ] = useState(prompts)
+  const [ showNoResultMessage, setShowNoResultMessage ] = useState(false)
   const abortController: AbortController = new AbortController();
   const { handleSearchPrompts } = usePromptActions()
 
   const fetchPrompts = async (): Promise<void> => {
     const data: PromptType[] | [] = await handleSearchPrompts(searchText)
-  
+    
+    setShowNoResultMessage(!!(data.length < 1))
     setDisplayPrompts(data)
     setIsDoneFetchingPrompts(true)
   }
@@ -32,6 +34,7 @@ const Feed = (): React.ReactNode => {
     if (searchText === '') {
       setDisplayPrompts(prompts)
       setIsDoneFetchingPrompts(true)
+      setShowNoResultMessage(false)
       return
     }
     let debounce: any = null
@@ -64,6 +67,7 @@ const Feed = (): React.ReactNode => {
           required
         />
       </form>
+      { showNoResultMessage && <span className="no-result">No Search results</span>}
       { isDoneFetchingPrompts
         ? <PromptCardList
             data={displayPrompts}
