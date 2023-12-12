@@ -47,4 +47,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [ ] Prompts
   - [ ] Favorite Prompt
   - [ ] Display Favorite Prompt in Dashboard
-- [ ] Skeleton Loader
+- [x] Skeleton Loader
