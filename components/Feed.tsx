@@ -6,11 +6,14 @@ import PromptCardList from "./PromptCardList"
 import { useAppProvider } from "@context/AppProvider"
 import { usePromptActions } from "@hooks/promptActions"
 import { PromptType } from "@customTypes/prompt"
+import Loader from "./Loader"
 
 
 const Feed = (): React.ReactNode => {
   const { 
-    prompts
+    prompts,
+    isDoneFetchingPrompts,
+    setIsDoneFetchingPrompts
   } = useAppProvider()
   const [ searchText, setSearchText ] = useState('')
   const [ displayPrompts, setDisplayPrompts ] = useState(prompts)
@@ -21,11 +24,14 @@ const Feed = (): React.ReactNode => {
     const data: PromptType[] | [] = await handleSearchPrompts(searchText)
   
     setDisplayPrompts(data)
+    setIsDoneFetchingPrompts(true)
   }
 
   useEffect(() => {
+    setIsDoneFetchingPrompts(false)
     if (searchText === '') {
       setDisplayPrompts(prompts)
+      setIsDoneFetchingPrompts(true)
       return
     }
     let debounce: any = null
@@ -58,11 +64,13 @@ const Feed = (): React.ReactNode => {
           required
         />
       </form>
-
-      <PromptCardList
-        data={displayPrompts}
-        handleTagClick={clickTag}
-      />
+      { isDoneFetchingPrompts
+        ? <PromptCardList
+            data={displayPrompts}
+            handleTagClick={clickTag}
+          />
+        : <Loader className="feed-loader" />
+      }
     </section>
   )
 }

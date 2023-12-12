@@ -77,6 +77,14 @@
 
 /* Tailwind Styles */
 
+.prompt-container {
+  min-width: 36rem;
+}
+
+.feed-loader {
+  @apply flex flex-row justify-center mt-20;
+}
+
 .app {
   @apply relative z-10 flex justify-center items-center flex-col mx-auto sm:px-0;
 }

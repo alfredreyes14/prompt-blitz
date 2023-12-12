@@ -15,6 +15,7 @@ export const AppProvider = ({ children }: AppProviderType) => {
   const previousRoute = usePreviousRoute()
   const { data: session }: SessionContextValue = useSession()
   const [ prompts, setPrompts ] = useState([])
+  const [ isDoneFetchingPrompts, setIsDoneFetchingPrompts ] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -22,6 +23,7 @@ export const AppProvider = ({ children }: AppProviderType) => {
       const prompts = await response.json()
 
       setPrompts(prompts)
+      setIsDoneFetchingPrompts(true)
     })();
   }, [])
 
@@ -30,7 +32,9 @@ export const AppProvider = ({ children }: AppProviderType) => {
       value={{
         previousRoute, 
         session,
-        prompts
+        prompts,
+        isDoneFetchingPrompts,
+        setIsDoneFetchingPrompts
       }}
     >
         { children }
