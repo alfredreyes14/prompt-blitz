@@ -1,6 +1,6 @@
 "use client"
 
-import PromptCard from "./PromptCard"
+import PromptCard from "./PromptCard/PromptCard"
 import { UserDetails } from "@customTypes/userDetails"
 import Image from 'next/image'
 import { useAppProvider } from "@context/AppProvider"

@@ -3,6 +3,8 @@
 import { useState } from "react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import { Card } from 'flowbite-react'
+import Chips from "@components/Chips"
 
 interface PromptCardProps {
   post: any,
@@ -29,7 +31,7 @@ const PromptCard = ({
   }
 
   return (
-    <div className="prompt_card" onClick={() => handleTagClick && handleTagClick(post._id)}>
+    <Card>
       <div className="flex justify-between items-start gap-5">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
@@ -46,7 +48,7 @@ const PromptCard = ({
           </div>
         </div>
 
-        <div className="copy_btn" onClick={() => handleCopy()}>
+        <div className="copy_btn ml-10" onClick={() => handleCopy()}>
           <Image
             src={ copied === post.prompt 
               ? '/assets/icons/tick.svg' 
@@ -58,16 +60,18 @@ const PromptCard = ({
           />
         </div>
       </div>
-
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
-      <p className="font-inter text-sm blue_gradient cursor-pointer">{post.tag}</p>
+      <Chips tag={post.tag} />
+      {/* <div className="w-5/12 relative grid select-none items-center whitespace-nowrap rounded-lg bg-orange-400 py-1.5 px-3 font-sans text-xs font-bold uppercase text-white">
+        { (post.tag.length > 8) ? `${post.tag.slice(0,8)}...` : post.tag }
+      </div> */}
       {isPromptCreatedByLoggedUser && pathName.includes('/profile') && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p className="font-inter text-sm green_gradient cursor-pointer" onClick={() => handleEdit()}>Edit</p>
           <p className="font-inter text-sm cursor-pointer" onClick={() => handleDelete()}>Delete</p>
         </div>
       )}
-    </div>
+    </Card>
   )
 }
 

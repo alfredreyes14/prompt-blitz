@@ -1,6 +1,5 @@
 import React from 'react'
-import PromptCard from '@components/PromptCard'
-import User from '@customTypes/user'
+import PromptCard from '@components/PromptCard/PromptCard'
 
 interface PromptCardList {
   data: any[],
