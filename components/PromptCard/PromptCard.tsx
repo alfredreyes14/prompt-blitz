@@ -54,7 +54,7 @@ const PromptCard = ({
               ? '/assets/icons/tick.svg' 
               : '/assets/icons/copy.svg'
             }
-            alt="CTA"
+            alt="copy"
             width={12}
             height={12}
           />
@@ -62,9 +62,6 @@ const PromptCard = ({
       </div>
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <Chips tag={post.tag} />
-      {/* <div className="w-5/12 relative grid select-none items-center whitespace-nowrap rounded-lg bg-orange-400 py-1.5 px-3 font-sans text-xs font-bold uppercase text-white">
-        { (post.tag.length > 8) ? `${post.tag.slice(0,8)}...` : post.tag }
-      </div> */}
       {isPromptCreatedByLoggedUser && pathName.includes('/profile') && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p className="font-inter text-sm green_gradient cursor-pointer" onClick={() => handleEdit()}>Edit</p>

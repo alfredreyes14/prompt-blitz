@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { usePathname  } from 'next/navigation'
-import Profile from '@components/Profile'
+import Profile from '@components/Profile/Profile'
 import { UserDetails } from '@customTypes/userDetails'
 import { SessionContextValue, useSession } from 'next-auth/react'
 

@@ -5,7 +5,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-import Profile from '@components/Profile'
+import Profile from '@components/Profile/Profile'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 import { useAppProvider } from '@context/AppProvider'
 
