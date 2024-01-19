@@ -6,7 +6,8 @@ import { UserDetails } from "@customTypes/userDetails"
 import Image from 'next/image'
 import Details from "./components/Details"
 import { useAppProvider } from "@context/AppProvider"
-import { Tabs } from 'flowbite-react';
+import Tabs from "./components/Tabs"
+import { Button } from 'flowbite-react';
 
 interface ReusableProfile {
   data: object[],
@@ -37,8 +38,8 @@ const Profile = ({
   }, [ userDetails?.image ])
 
   return (
-    <section className="w-full">
-      <div className="flex flex-col items-center">
+    <main className="w-full">
+      <article className="flex flex-col items-center">
         <Image
           src={imageLink}
           width={120}
@@ -47,8 +48,8 @@ const Profile = ({
           alt="profile-mage"
           onClick={() => {}}
         />
-        <span className="mt-3 text-gray-700 font-bold text-2xl">{ userDetails?.username || userDetails?.name }</span>
-        <span className="text-sm text-gray-500">@username</span>
+        <p className="mt-3 text-gray-700 font-bold text-2xl">{ userDetails?.username || userDetails?.name }</p>
+        <p className="text-sm text-gray-500">@username</p>
         <Details>
           <Details.BirthDay>
             <Image
@@ -58,7 +59,7 @@ const Profile = ({
               width={13}
               height={13}
             />
-            <span className="text-xs">April 14, 1998</span>
+            <p className="text-xs">April 14, 1998</p>
           </Details.BirthDay>
           <Details.Location>
             <Image
@@ -68,7 +69,7 @@ const Profile = ({
               width={13}
               height={13}
             />
-            <span className="text-xs">Mandaluyong, Philippines</span>
+            <p className="text-xs">Mandaluyong, Philippines</p>
           </Details.Location>
           <Details.JoinDate>
             <Image
@@ -78,10 +79,13 @@ const Profile = ({
               width={13}
               height={13}
             />
-            <span className="text-xs">June 2023</span>
+            <p className="text-xs">June 2023</p>
           </Details.JoinDate>
         </Details>
-      </div>
+      </article>
+      <article>
+        <Tabs />
+      </article>
       {/* <p className="desc text-left">Prompts</p> */}
       {/* <div className="prompt_layout mt-3">
         {data.map(post => (
@@ -95,7 +99,7 @@ const Profile = ({
           />
         ))}
       </div> */}
-    </section>
+    </main>
   )
 }
 
