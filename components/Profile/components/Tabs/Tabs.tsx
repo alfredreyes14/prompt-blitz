@@ -1,6 +1,5 @@
 import React from 'react'
 import { Tabs as FlowBiteTabs } from 'flowbite-react';
-import type { FlowbiteTabsTheme } from 'flowbite-react';
 
 type TabItem = {
   title: string,
@@ -13,13 +12,11 @@ const Tabs = (): React.ReactNode => {
     {
       title: 'Prompts',
       isActive: true,
-      class: 'text-red-600 rounded-t-lg border-b-2 border-red-600 active dark:text-red-500 dark:border-red-500',
       children: <div>Prompts</div>
     },
     {
       title: 'Favorites',
       isActive: false,
-      class: 'text-red-600 rounded-t-lg border-b-2 border-red-600 active dark:text-red-500 dark:border-red-500',
       children: <div>Faves</div>
     }
   ]
@@ -34,7 +31,6 @@ const Tabs = (): React.ReactNode => {
           <FlowBiteTabs.Item
             active={item.isActive}
             title={item.title}
-            className={item.class}
           >
             { item.children }
           </FlowBiteTabs.Item>

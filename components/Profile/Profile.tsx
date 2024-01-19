@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Details from "./components/Details"
 import { useAppProvider } from "@context/AppProvider"
 import Tabs from "./components/Tabs"
-import { Button } from 'flowbite-react';
+import Button from "@components/Button"
 
 interface ReusableProfile {
   data: object[],
@@ -82,6 +82,16 @@ const Profile = ({
             <p className="text-xs">June 2023</p>
           </Details.JoinDate>
         </Details>
+      </article>
+      <article className="flex flex-row-reverse mr-auto ml-auto w-3/4 mt-3">
+        <section>
+          <Button 
+            gradientMonochrome="teal"
+            pill
+          >
+            Create Prompt
+          </Button>
+        </section>
       </article>
       <article>
         <Tabs />
