@@ -6,8 +6,6 @@ import { UserDetails } from "@customTypes/userDetails"
 import Image from 'next/image'
 import Details from "./components/Details"
 import { useAppProvider } from "@context/AppProvider"
-import Tabs from "./components/Tabs"
-import { Card } from "flowbite-react"
 
 interface ReusableProfile {
   data: object[],
