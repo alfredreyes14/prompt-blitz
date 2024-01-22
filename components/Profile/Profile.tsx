@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Details from "./components/Details"
 import { useAppProvider } from "@context/AppProvider"
 import Tabs from "./components/Tabs"
-import Button from "@components/Button"
+import { Card } from "flowbite-react"
 
 interface ReusableProfile {
   data: object[],
@@ -83,32 +83,28 @@ const Profile = ({
           </Details.JoinDate>
         </Details>
       </article>
-      <article className="flex flex-row-reverse mr-auto ml-auto w-3/4 mt-3">
-        <section>
-          <Button 
-            gradientMonochrome="teal"
-            pill
-          >
+      <article className="flex flex-col items-center gap-7 w-full px-5 py-5">
+        <section className="flex flex-row-reverse gap-4 w-2/4">
+          <section>
             Create Prompt
-          </Button>
+          </section>
+          <section>
+            Filter
+          </section>
+        </section>
+        <section className="w-2/4">
+          {data.map(item => (
+            <PromptCard
+              key={item._id}
+              post={item}
+              handleTagClick={() => {}}
+              handleEdit={() => {}}
+              handleDelete={() => {}}
+              isPromptCreatedByLoggedUser
+            />
+          ))}
         </section>
       </article>
-      <article>
-        <Tabs />
-      </article>
-      {/* <p className="desc text-left">Prompts</p> */}
-      {/* <div className="prompt_layout mt-3">
-        {data.map(post => (
-          <PromptCard
-            key={post._id}
-            post={post}
-            handleTagClick={() => {}}
-            handleEdit={() => handleEdit && handleEdit(post)}
-            handleDelete={() => handleDelete && handleDelete(post._id)}
-            isPromptCreatedByLoggedUser={session?.user?.id === post.creator._id}
-          />
-        ))}
-      </div> */}
     </main>
   )
 }

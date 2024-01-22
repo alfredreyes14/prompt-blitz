@@ -31,8 +31,8 @@ const PromptCard = ({
   }
 
   return (
-    <Card>
-      <div className="flex justify-between items-start gap-5">
+    <Card className="w-full mb-6">
+      <div className="flex justify-between items-start">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
             src={post.creator.image || post.creator[0]?.image}
@@ -44,7 +44,8 @@ const PromptCard = ({
 
           <div className="flex flex-col">
             <h3 className="font-satoshi font-semibold text-gray-900">{ post.creator[0]?.username || post.creator.username }</h3>
-            <p className="font-inter text-sm text-gray-500">{ post.creator[0]?.email || post.creator.email }</p>
+            {/* { post.creator[0]?.email || post.creator.email } */}
+            <p className="font-inter text-sm text-gray-500">2 days ago</p>
           </div>
         </div>
 
@@ -62,12 +63,12 @@ const PromptCard = ({
       </div>
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <Chips tag={post.tag} />
-      {isPromptCreatedByLoggedUser && pathName.includes('/profile') && (
+      {/* {isPromptCreatedByLoggedUser && pathName.includes('/profile') && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p className="font-inter text-sm green_gradient cursor-pointer" onClick={() => handleEdit()}>Edit</p>
           <p className="font-inter text-sm cursor-pointer" onClick={() => handleDelete()}>Delete</p>
         </div>
-      )}
+      )} */}
     </Card>
   )
 }

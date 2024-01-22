@@ -1,5 +1,6 @@
 import React from 'react'
 import { Tabs as FlowBiteTabs } from 'flowbite-react';
+import PromptCardList from '@components/PromptCardList';
 
 type TabItem = {
   title: string,
@@ -7,36 +8,50 @@ type TabItem = {
   children: React.ReactNode
 }
 
-const Tabs = (): React.ReactNode => {
+type TabProps = {
+  data: any
+}
+
+const Tabs = ({ data }: TabProps): React.ReactNode => {
   const items: TabItem[] = [
     {
       title: 'Prompts',
       isActive: true,
-      children: <div>Prompts</div>
+      children: 
+      <PromptCardList
+        data={ data }
+      />
     },
     {
       title: 'Favorites',
       isActive: false,
-      children: <div>Faves</div>
+      children:
+      <PromptCardList
+        data={ data } 
+      />
     }
   ]
 
   return (
-    <section className="flex flex-row justify-center mt-3">
-      <FlowBiteTabs 
-        aria-label="Profile tabs"
-        style="underline"
-      >
-        {items.map(item => (
-          <FlowBiteTabs.Item
-            active={item.isActive}
-            title={item.title}
-          >
-            { item.children }
-          </FlowBiteTabs.Item>
-        ))}
-      </FlowBiteTabs>
-    </section>
+    <>
+      <article className="flex before:flex-row justify-center mt-3">
+        <FlowBiteTabs 
+          aria-label="Profile tabs"
+          style="underline"
+        >
+          {items.map(item => (
+            <FlowBiteTabs.Item
+              active={item.isActive}
+              title={item.title}
+              key={item.title}
+              className='bg-yellow-500'
+            >
+              { item.children }
+            </FlowBiteTabs.Item>
+          ))}
+        </FlowBiteTabs>
+      </article>
+    </>
   )
 }
 
