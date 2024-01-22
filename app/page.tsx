@@ -9,7 +9,7 @@ const Home = (): React.ReactNode => {
         </h1>
         <br className="max-md:hidden"/>
         <p className="desc text-center">
-          Promptopia clone is a promptopia project inspired from a youtube video aiming to showcase my skills using Next.js
+          PromptBlitz is your go-to app when it comes to prompt management. Manage and share your prompts to everyone!
         </p>
 
         <Feed />

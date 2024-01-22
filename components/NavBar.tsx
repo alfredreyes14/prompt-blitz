@@ -36,7 +36,7 @@ const NavBar = (): React.ReactNode => {
             height={30}
             className='object-contain'
           />
-          <p className="logo_text">Promptopia</p>
+          <p className="logo_text">PromptBlitz</p>
         </Link>
         <div className="cursor-pointer sm:px-5 md:px-10 lg:px-20">
           { !providers && <RoundSkeleton /> }
