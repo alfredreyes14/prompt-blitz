@@ -3,8 +3,14 @@
 import { useState } from "react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Card } from 'flowbite-react'
+import { Card, Dropdown } from 'flowbite-react'
 import Chips from "@components/Chips"
+import {
+    HiDocumentDuplicate, 
+    HiPencilSquare, 
+    HiTrash, 
+    HiBookmark
+} from 'react-icons/hi2'
 
 interface PromptCardProps {
   post: any,
@@ -12,6 +18,7 @@ interface PromptCardProps {
   handleEdit?: Function,
   handleDelete?: Function,
   isPromptCreatedByLoggedUser: boolean
+  isProfile?: boolean
 }
 
 const PromptCard = ({
@@ -19,7 +26,8 @@ const PromptCard = ({
   handleTagClick,
   handleEdit,
   handleDelete,
-  isPromptCreatedByLoggedUser = false
+  isPromptCreatedByLoggedUser = false,
+  isProfile = true
 }: PromptCardProps): React.ReactNode => {
   const [ copied, setCopied ]: [ string, Function ] = useState('')
   const pathName: string = usePathname()
@@ -29,6 +37,15 @@ const PromptCard = ({
     navigator.clipboard.writeText(post.prompt)
     setTimeout(() => setCopied(""), 3000)
   }
+
+  const renderMenu: Function = (): React.ReactNode => (
+      <Image
+        src={'/assets/icons/ellipsis.svg'}
+        alt="menu"
+        width={20}
+        height={20}
+      />
+  )
 
   return (
     <Card className="w-full mb-6">
@@ -49,16 +66,26 @@ const PromptCard = ({
           </div>
         </div>
 
-        <div className="copy_btn ml-10" onClick={() => handleCopy()}>
-          <Image
-            src={ copied === post.prompt 
-              ? '/assets/icons/tick.svg' 
-              : '/assets/icons/copy.svg'
-            }
-            alt="copy"
-            width={12}
-            height={12}
-          />
+        <div className="copy_btn ml-10">
+          {
+            isProfile
+              ? <Dropdown label="" dismissOnClick={false} renderTrigger={() => renderMenu()}>
+                  <Dropdown.Item onClick={() => handleCopy()} icon={HiDocumentDuplicate}>Copy</Dropdown.Item>
+                  <Dropdown.Item icon={HiPencilSquare}>Edit</Dropdown.Item>
+                  <Dropdown.Item icon={HiTrash}>Delete</Dropdown.Item>
+                  <Dropdown.Item icon={HiBookmark}>Pin</Dropdown.Item>
+                </Dropdown>
+              : <Image
+                  src={ copied === post.prompt 
+                    ? '/assets/icons/tick.svg' 
+                    : '/assets/icons/copy.svg'
+                  }
+                  onClick={() => handleCopy()}
+                  alt="copy"
+                  width={12}
+                  height={12}
+                />
+          }
         </div>
       </div>
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>

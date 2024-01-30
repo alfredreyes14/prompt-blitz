@@ -6,6 +6,8 @@ import { UserDetails } from "@customTypes/userDetails"
 import Image from 'next/image'
 import Details from "./components/Details"
 import { useAppProvider } from "@context/AppProvider"
+import { HiPlusCircle  } from "react-icons/hi2"
+import { Button } from 'flowbite-react';
 
 interface ReusableProfile {
   data: object[],
@@ -83,10 +85,13 @@ const Profile = ({
       </article>
       <article className="flex flex-col items-center gap-7 w-full px-5 py-5">
         <section className="flex flex-row-reverse gap-4 w-2/4">
-          <section>
-            Create Prompt
+          <section className="flex flex-row">
+            <Button className="bg-orange-400">
+              <HiPlusCircle className="mt-1 mr-1"/>
+                Create Prompt
+            </Button>
           </section>
-          <section>
+          <section className="mr-6">
             Filter
           </section>
         </section>
