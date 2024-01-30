@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Details from "./components/Details"
 import { useAppProvider } from "@context/AppProvider"
 import { HiPlusCircle  } from "react-icons/hi2"
-import { Button } from 'flowbite-react';
+import { Button, Dropdown } from 'flowbite-react';
 
 interface ReusableProfile {
   data: object[],
@@ -91,8 +91,13 @@ const Profile = ({
                 Create Prompt
             </Button>
           </section>
-          <section className="mr-6">
-            Filter
+          <section className="mr-6 mt-2">
+          <Dropdown label="Dropdown button" dismissOnClick={false} inline>
+            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>Earnings</Dropdown.Item>
+            <Dropdown.Item>Sign out</Dropdown.Item>
+          </Dropdown>
           </section>
         </section>
         <section className="w-2/4">
